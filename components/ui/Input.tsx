@@ -2,15 +2,20 @@ import React, { InputHTMLAttributes, ReactNode } from "react";
 
 interface InputRootProps {
   children: ReactNode;
+  className?: string;
 }
 
-const Input = ({ children }: InputRootProps) => {
-  return <div className="flex flex-col gap-1 w-full">{children}</div>;
+const Input = ({ children, className }: InputRootProps) => {
+  return (
+    <div className={`${className} flex flex-col gap-1 w-full`}>{children}</div>
+  );
 };
 
 // ✅ Label
 const Label = ({ children }: { children: ReactNode }) => (
-  <label className="text-sm font-medium text-gray-700">{children}</label>
+  <label className="text-sm font-medium text-medium-gray whitespace-nowrap">
+    {children}
+  </label>
 );
 
 // ✅ Text Field
@@ -21,7 +26,7 @@ interface FieldProps extends InputHTMLAttributes<HTMLInputElement> {
 const Field = ({ hasIcon, ...props }: FieldProps) => (
   <input
     {...props}
-    className={`w-full border rounded-xl px-3 py-2 text-sm focus:ring-2 focus:ring-green-500 focus:border-green-500 ${
+    className={`w-full border-2 rounded-xl px-3 py-2 focus:outline-custom-green transition-colors outline-transparent duration-300 border-medium-gray/20 font-medium  ${
       hasIcon ? "pl-10" : ""
     }`}
   />
