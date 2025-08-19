@@ -41,7 +41,7 @@ const Modal = ({ children, title, onClose, className, isOpen }: ModalProps) => {
             size={30}
           />
         </div>
-        <div className="px-4">{children}</div>
+        <div className="px-4 flex flex-col">{children}</div>
       </div>
     </div>
   );
