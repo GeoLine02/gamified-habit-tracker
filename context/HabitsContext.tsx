@@ -1,12 +1,12 @@
 "use client";
 
-import { HabitType } from "@/app/(home)/habits/habit.type";
+import { HabitDetails } from "@/app/(home)/habits/habit.type";
 import { useLocalStorage } from "@/components/shared/hooks/useLocalStorage";
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 interface HabitsContextType {
-  habits: HabitType[];
-  setHabits: (newValue: HabitType[]) => void;
+  habits: HabitDetails[];
+  setHabits: (newValue: HabitDetails[]) => void;
   onToggleNewHabitModal: () => void;
   isHabitsModalOpen: boolean;
 }
@@ -14,11 +14,22 @@ interface HabitsContextType {
 const HabitsContext = createContext<HabitsContextType | undefined>(undefined);
 
 export const HabitsProvider = ({ children }: { children: React.ReactNode }) => {
-  const [habits, setHabits] = useLocalStorage<HabitType[]>("habits", []);
+  const { getItem } = useLocalStorage<HabitDetails[]>("habits");
+
+  // 1️⃣ Always start with an empty array to avoid SSR/client mismatch
+  const [habits, setHabits] = useState<HabitDetails[]>([]);
+
   const [isHabitsModalOpen, setIsHabitsModalOpen] = useState(false);
 
+  // 2️⃣ Hydrate client-side from localStorage after mount
+  useEffect(() => {
+    const stored = getItem();
+    if (stored) setHabits(stored);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const onToggleNewHabitModal = () => {
-    setIsHabitsModalOpen(!isHabitsModalOpen);
+    setIsHabitsModalOpen((prev) => !prev);
   };
 
   return (

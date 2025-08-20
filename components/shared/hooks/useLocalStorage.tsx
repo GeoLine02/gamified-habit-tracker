@@ -1,28 +1,34 @@
-import { useState, useEffect } from "react";
+"use client";
 
-export function useLocalStorage<T>(key: string, initialValue: T) {
-  const [value, setValue] = useState<T>(initialValue);
-
-  useEffect(() => {
+export function useLocalStorage<T>(key: string) {
+  const getItem = (): T | undefined => {
     try {
-      const stored = localStorage.getItem(key);
-      if (stored) {
-        setValue(JSON.parse(stored));
-      }
+      if (typeof window === "undefined") return undefined; // ✅ SSR safe
+      const item = window.localStorage.getItem(key);
+      return item ? JSON.parse(item) : undefined;
     } catch (error) {
-      console.error("Error reading localStorage key “" + key + "”:", error);
-    }
-  }, [key]);
-
-  // custom setter that also updates localStorage
-  const setAndStore = (newValue: T) => {
-    try {
-      setValue(newValue);
-      localStorage.setItem(key, JSON.stringify(newValue));
-    } catch (error) {
-      console.error("Error setting localStorage key “" + key + "”:", error);
+      console.error(`Error reading localStorage key "${key}":`, error);
+      return undefined;
     }
   };
 
-  return [value, setAndStore] as const;
+  const setItem = (value: T) => {
+    try {
+      if (typeof window === "undefined") return; // ✅ guard
+      window.localStorage.setItem(key, JSON.stringify(value));
+    } catch (error) {
+      console.error(`Error setting localStorage key "${key}":`, error);
+    }
+  };
+
+  const removeItem = () => {
+    try {
+      if (typeof window === "undefined") return; // ✅ guard
+      window.localStorage.removeItem(key);
+    } catch (error) {
+      console.error(`Error removing localStorage key "${key}":`, error);
+    }
+  };
+
+  return { getItem, setItem, removeItem } as const;
 }
