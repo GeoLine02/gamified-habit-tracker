@@ -45,6 +45,7 @@ const Button = ({ children }: { children: ReactNode }) => {
   const { toggle } = useDropDown();
   return (
     <button
+      type="button"
       onClick={toggle}
       className="flex items-center gap-2 rounded-lg border-2 border-medium-gray/20 px-3 py-2 shadow-sm transition-all duration-300 hover:bg-custom-green hover:text-white cursor-pointer"
     >
@@ -97,6 +98,7 @@ const Item = ({
 
   return (
     <button
+      type="button"
       onClick={handleClick}
       className={classNames(
         "block w-full px-4 py-2 text-left text-sm hover:bg-custom-green transition-all duration-300 cursor-pointer hover:text-white"

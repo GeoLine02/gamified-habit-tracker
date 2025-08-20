@@ -6,9 +6,9 @@ interface ToggleProps {
 }
 
 const Toggle = ({ handleToggle, isToggled }: ToggleProps) => {
-  const toggleAnimation = classNames("transition-all duration-300", {
-    "left-0": !isToggled,
-    "left-5": isToggled,
+  const toggleAnimation = classNames("absolute transition-all duration-300", {
+    "left-1": !isToggled,
+    "left-6": isToggled,
   });
 
   return (
@@ -17,7 +17,7 @@ const Toggle = ({ handleToggle, isToggled }: ToggleProps) => {
       onClick={handleToggle}
       className={`${
         isToggled ? "bg-custom-green" : "bg-medium-gray/20"
-      } w-12 rounded-full relative cursor-pointer p-1`}
+      } w-12 h-7 rounded-full relative cursor-pointer p-1`}
     >
       <div
         className={`${toggleAnimation} w-5 aspect-square rounded-full bg-white`}
