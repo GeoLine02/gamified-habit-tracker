@@ -1,6 +1,6 @@
-import HabitsList from "./habits/HabitsList";
-import NewHabitBtn from "./habits/NewHabitBtn";
-import NewHabitModal from "./habits/NewHabitModal";
+import HabitsList from "./components/habits/HabitsList";
+import NewHabitBtn from "./components/habits/NewHabitBtn";
+import NewHabitModal from "./components/habits/NewHabitModal";
 
 export default function Home() {
   return (

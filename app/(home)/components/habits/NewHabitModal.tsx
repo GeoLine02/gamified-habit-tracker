@@ -7,9 +7,9 @@ import { FormEvent, useEffect, useState } from "react";
 import { HabitDetails } from "./habit.type";
 import { v4 as uuidv4 } from "uuid";
 import { useLocalStorage } from "@/components/shared/hooks/useLocalStorage";
-import { calculateXP } from "../utils/calculateExp";
 import { validateForm } from "@/components/utils/validateForm";
-import { habitSchema } from "./schema/newHabitSchema";
+import { habitSchema } from "../../schema/newHabitSchema";
+import { calculateXP } from "../../utils/calculateExp";
 
 const NewHabitModal = () => {
   const { habits, setHabits, onToggleNewHabitModal, isHabitsModalOpen } =

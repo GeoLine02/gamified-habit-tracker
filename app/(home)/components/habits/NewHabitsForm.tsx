@@ -4,7 +4,7 @@ import Toggle from "@/components/ui/Toggle";
 import React, { ChangeEvent, FormEvent } from "react";
 import { FaCheck, FaTrash } from "react-icons/fa6";
 import { HabitDetails } from "./habit.type";
-import { calculateXP } from "../utils/calculateExp";
+import { calculateXP } from "../../utils/calculateExp";
 
 interface NewHabitsFormProps {
   newHabitDetails: HabitDetails;
