@@ -17,8 +17,6 @@ const HabitCard = ({
   isCompleted,
   onCompleteHabit,
 }: HabitCardProps) => {
-  console.log("isComepleted: ", isCompleted);
-
   return (
     <Card className="w-full md:max-w-[360px] cursor-pointer flex items-center gap-4 justify-between">
       <div className="flex flex-col gap-3 w-full">

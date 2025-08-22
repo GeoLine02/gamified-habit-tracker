@@ -1,7 +1,7 @@
 import { HabitDetails } from "../habits/habit.type";
 
 export const calculateXP = (habit: HabitDetails) => {
-  const streakDays = parseInt(habit.streak.split(" ")[0]) || 0;
+  const streakDays = habit.streak;
   const baseXP = 10;
   const frequencyMultiplier =
     {

@@ -3,20 +3,14 @@ export type HabitType = {
   title: string;
   progressPercentage: number;
   xp: number;
-  streak: string;
+  streak: number;
   isCompleted: boolean;
 };
 
-export type HabitDetails = {
-  id: string;
-  title: string;
+export type HabitDetails = HabitType & {
   description?: string;
   frequency: string;
-  timesPerDay: number | null;
+  timesPerDay: number;
   reminder: boolean;
   remindTime?: string;
-  xp: number;
-  streak: string;
-  progressPercentage: number;
-  isCompleted: boolean;
 };

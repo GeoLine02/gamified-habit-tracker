@@ -12,22 +12,30 @@ const HabitsList = () => {
   // temp checked state for flash effect
   const [flashCheckedId, setFlashCheckedId] = useState<string | null>(null);
 
+  const calculateProgress = (
+    progressPercentage: number,
+    timesPerDay: number
+  ) => {
+    return Math.min(100, progressPercentage + Math.ceil(100 / timesPerDay));
+  };
+
   const onCompleteHabit = (id: string) => {
-    const updatedHabits = habits.map((habit) =>
-      habit.id === id
-        ? {
-            ...habit,
-            progressPercentage: Math.min(
-              100,
-              habit.progressPercentage +
-                Math.ceil(100 / Number(habit.timesPerDay))
-            ),
-            streak: habit.isCompleted
-              ? `${habit.streak + 1} day`
-              : `${habit} day`,
-          }
-        : habit
-    );
+    const updatedHabits = habits.map((habit) => {
+      if (habit.id === id && !habit.isCompleted) {
+        const newProgress = calculateProgress(
+          habit.progressPercentage,
+          habit.timesPerDay
+        );
+
+        return {
+          ...habit,
+          progressPercentage: newProgress,
+          streak: newProgress === 100 ? habit.streak + 1 : habit.streak,
+          isCompleted: newProgress === 100 ? true : false,
+        };
+      }
+      return habit;
+    });
 
     setHabits(updatedHabits);
     setItem(updatedHabits);

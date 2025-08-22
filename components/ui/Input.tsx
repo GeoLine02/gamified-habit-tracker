@@ -100,7 +100,7 @@ const Checkbox = ({ checked, ...props }: CheckboxProps) => (
     {checked ? (
       <IoCheckbox size={40} className="text-green-600" />
     ) : (
-      <MdCheckBoxOutlineBlank size={40} className="text-medium-gray" />
+      <MdCheckBoxOutlineBlank size={40} className="text-light-gray" />
     )}
     <input type="checkbox" {...props} checked={checked} className="hidden" />
   </label>
