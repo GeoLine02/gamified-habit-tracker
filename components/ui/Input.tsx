@@ -1,5 +1,7 @@
 import classNames from "classnames";
 import React, { InputHTMLAttributes, ReactNode } from "react";
+import { IoCheckbox } from "react-icons/io5";
+import { MdCheckBoxOutlineBlank } from "react-icons/md";
 
 // Root component
 interface InputRootProps {
@@ -8,9 +10,7 @@ interface InputRootProps {
 }
 
 const Input = ({ children, className }: InputRootProps) => {
-  return (
-    <div className={`${className} flex flex-col gap-1 w-full`}>{children}</div>
-  );
+  return <div className={`${className}`}>{children}</div>;
 };
 
 // ✅ Label
@@ -93,24 +93,16 @@ const Icon = ({ children }: { children: ReactNode }) => (
 );
 
 // ✅ Checkbox
-interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
-  label?: string;
-  description?: string;
-}
+type CheckboxProps = InputHTMLAttributes<HTMLInputElement>;
 
-const Checkbox = ({ label, description, ...props }: CheckboxProps) => (
-  <label className="flex items-start gap-2 cursor-pointer select-none">
-    <input
-      type="checkbox"
-      {...props}
-      className="mt-1 h-4 w-4 rounded border-gray-300 text-green-600 focus:ring-green-500"
-    />
-    <span className="flex flex-col">
-      <span className="text-sm font-medium text-gray-700">{label}</span>
-      {description && (
-        <span className="text-xs text-gray-500">{description}</span>
-      )}
-    </span>
+const Checkbox = ({ checked, ...props }: CheckboxProps) => (
+  <label className="cursor-pointer select-none inline-flex items-center">
+    {checked ? (
+      <IoCheckbox size={40} className="text-green-600" />
+    ) : (
+      <MdCheckBoxOutlineBlank size={40} className="text-medium-gray" />
+    )}
+    <input type="checkbox" {...props} checked={checked} className="hidden" />
   </label>
 );
 

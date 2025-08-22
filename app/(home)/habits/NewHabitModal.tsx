@@ -28,6 +28,7 @@ const NewHabitModal = () => {
     streak: "0 days",
     xp: 0,
     progressPercentage: 0,
+    isCompleted: false,
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -51,6 +52,7 @@ const NewHabitModal = () => {
       streak: "0 days",
       xp: 0,
       progressPercentage: 0,
+      isCompleted: false,
     });
   };
 
@@ -73,6 +75,7 @@ const NewHabitModal = () => {
       xp: calculateXP(newHabitDetails),
       streak: "0 days",
       progressPercentage: 0,
+      isCompleted: newHabitDetails.isCompleted,
     };
 
     const updatedHabits = [...habits, habitWithXP];
