@@ -4,6 +4,7 @@ export type HabitType = {
   progressPercentage: number;
   xp: number;
   streak: string;
+  isCompleted: boolean;
 };
 
 export type HabitDetails = {
@@ -17,4 +18,5 @@ export type HabitDetails = {
   xp: number;
   streak: string;
   progressPercentage: number;
+  isCompleted: boolean;
 };

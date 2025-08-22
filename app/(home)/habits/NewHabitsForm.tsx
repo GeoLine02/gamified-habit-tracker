@@ -41,6 +41,7 @@ const NewHabitsForm = ({
     setNewHabitDetails((prev) => ({
       ...prev,
       reminder: !prev.reminder,
+      remindTime: "00:00",
     }));
   };
 

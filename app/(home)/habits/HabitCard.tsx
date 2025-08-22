@@ -1,8 +1,12 @@
 import React from "react";
 import { HabitType } from "./habit.type";
 import Card from "@/components/ui/Card";
+import ProgressBar from "@/components/ui/ProgressBar";
+import Input from "@/components/ui/Input";
 
-type HabitCardProps = HabitType & {};
+type HabitCardProps = HabitType & {
+  onCompleteHabit: (id: string) => void;
+};
 
 const HabitCard = ({
   id,
@@ -10,20 +14,29 @@ const HabitCard = ({
   streak,
   title,
   xp,
+  isCompleted,
+  onCompleteHabit,
 }: HabitCardProps) => {
+  console.log("isComepleted: ", isCompleted);
+
   return (
-    <Card className="w-full md:max-w-[360px] cursor-pointer">
-      <div className="flex flex-col gap-3">
+    <Card className="w-full md:max-w-[360px] cursor-pointer flex items-center gap-4 justify-between">
+      <div className="flex flex-col gap-3 w-full">
         <h1 className="text-xl font-semibold">{title}</h1>
         {/* exp bar */}
-        <div className="w-full h-2 bg-light-gray">
-          <div className="w-1/3 bg-custom-green rounded-full"></div>
-        </div>
+        <ProgressBar percent={progressPercentage} />
         <div className="flex items-center gap-11 text-medium-gray font-medium">
           <span>XP: +{xp}</span>
           <span>Streak: {streak}</span>
         </div>
       </div>
+
+      <Input>
+        <Input.Checkbox
+          onChange={() => onCompleteHabit(id)}
+          checked={isCompleted}
+        />
+      </Input>
     </Card>
   );
 };

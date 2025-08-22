@@ -2,9 +2,40 @@
 
 import { useHabitsContext } from "@/context/HabitsContext";
 import HabitCard from "./HabitCard";
+import { useLocalStorage } from "@/components/shared/hooks/useLocalStorage";
+import { useState } from "react";
 
 const HabitsList = () => {
-  const { habits } = useHabitsContext();
+  const { habits, setHabits } = useHabitsContext();
+  const { setItem } = useLocalStorage("habits");
+
+  // temp checked state for flash effect
+  const [flashCheckedId, setFlashCheckedId] = useState<string | null>(null);
+
+  const onCompleteHabit = (id: string) => {
+    const updatedHabits = habits.map((habit) =>
+      habit.id === id
+        ? {
+            ...habit,
+            progressPercentage: Math.min(
+              100,
+              habit.progressPercentage +
+                Math.ceil(100 / Number(habit.timesPerDay))
+            ),
+            streak: habit.isCompleted
+              ? `${habit.streak + 1} day`
+              : `${habit} day`,
+          }
+        : habit
+    );
+
+    setHabits(updatedHabits);
+    setItem(updatedHabits);
+
+    // flash check for 1 second
+    setFlashCheckedId(id);
+    setTimeout(() => setFlashCheckedId(null), 1000);
+  };
 
   return (
     <div className="flex flex-col gap-4 flex-1">
@@ -19,12 +50,16 @@ const HabitsList = () => {
         {habits &&
           habits.map((habit) => (
             <HabitCard
+              onCompleteHabit={onCompleteHabit}
               key={habit.id}
               id={habit.id}
               progressPercentage={habit.progressPercentage}
               streak={habit.streak}
               title={habit.title}
               xp={habit.xp}
+              isCompleted={
+                habit.progressPercentage === 100 || flashCheckedId === habit.id
+              }
             />
           ))}
       </div>
