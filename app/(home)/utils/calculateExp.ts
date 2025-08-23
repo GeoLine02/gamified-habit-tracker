@@ -1,4 +1,4 @@
-import { HabitDetails } from "../habits/habit.type";
+import { HabitDetails } from "../components/habits/habit.type";
 
 export const calculateXP = (habit: HabitDetails) => {
   const streakDays = habit.streak;
