@@ -1,6 +1,6 @@
 "use client";
 
-import { HabitDetails } from "@/app/(home)/habits/habit.type";
+import { HabitDetails } from "@/app/(home)/components/habits/habit.type";
 import { useLocalStorage } from "@/components/shared/hooks/useLocalStorage";
 import { createContext, useContext, useEffect, useState } from "react";
 

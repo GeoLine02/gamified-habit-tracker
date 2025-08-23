@@ -10,14 +10,17 @@ export default function Profile() {
   const [userGender] = useState<string>("female");
 
   return (
-    <div className="flex items-center gap-2 ">
+    <div className="flex items-center gap-2">
       <Image
         className="max-w-20"
         src={userGender === "female" ? FemaleProfileIcon : MaleProfileIcon}
         alt="user-icon"
         aria-labelledby="user profile"
       />
-      <ExpBar />
+      <div className="space-y-1 w-full">
+        <h1 className="text-xl font-semibold">Nika Tsuladze</h1>
+        <ExpBar />
+      </div>
     </div>
   );
 }
