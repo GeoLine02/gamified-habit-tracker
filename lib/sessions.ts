@@ -1,5 +1,6 @@
+import "server-only";
+
 import { JWTPayload, jwtVerify, SignJWT } from "jose";
-import { ObjectId } from "mongodb";
 import { cookies } from "next/headers";
 
 const secretKey = process.env.SESSION_SECRET;
@@ -25,7 +26,7 @@ export async function decrypt(session: string) {
   }
 }
 
-export async function createSession(userId: ObjectId) {
+export async function createSession(userId: string) {
   const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
 
   const session = await encrypt({ userId, expiresAt });

@@ -11,7 +11,7 @@ export const registerValidationSchema = z
       .min(6, "Password must be at least 6 characters")
       .max(50, "Password must be at most 50 characters"),
     repeatPassword: z.string().min(6, "Repeat password is required"),
-    gender: z.enum(["male", "female"]), // just the tuple
+    gender: z.enum(["male", "female"]),
   })
   .refine((data) => data.password === data.repeatPassword, {
     message: "Passwords must match",

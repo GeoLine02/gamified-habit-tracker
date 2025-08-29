@@ -5,6 +5,7 @@ import { loginValidationSchema, registerValidationSchema } from "./validation";
 import { handleHashPassword } from "@/components/utils/hashPassword";
 import { redirect } from "next/navigation";
 import { createSession } from "@/lib/sessions";
+import bcrypt from "bcryptjs";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function register(_state: any, formData: FormData) {
@@ -27,12 +28,27 @@ export async function register(_state: any, formData: FormData) {
 
   const userCollection = await getCollection("users");
 
-  if (!userCollection) return { errors: { username: "Server error!" } };
+  if (!userCollection)
+    return {
+      errors: {
+        username: "Server error!",
+        password: "",
+        repeatPasswrod: "",
+        gender: "",
+      },
+    };
 
   const existingUser = await userCollection.findOne({ username });
 
   if (existingUser)
-    return { errors: { username: "Username already exist. Try another one" } };
+    return {
+      errors: {
+        username: "Username already exist. Try another one",
+        passowrd: "",
+        repeatPassword: "",
+        gender: "",
+      },
+    };
 
   const hashedPasswrod = await handleHashPassword(password, 10);
 
@@ -50,15 +66,42 @@ export async function register(_state: any, formData: FormData) {
     totalSteak: 0,
   });
 
-  await createSession(results.insertedId);
+  await createSession(results.insertedId.toString());
 
   redirect("/");
 }
 
-export async function login(state, formData: FormData) {
-  try {
-    const validatedFields = loginValidationSchema.safeParse({});
-  } catch (error) {
-    console.log(error);
-  }
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function login(_state: any, formData: FormData) {
+  const validatedFields = loginValidationSchema.safeParse({
+    username: formData.get("username"),
+    password: formData.get("password"),
+  });
+
+  if (!validatedFields.success)
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      username: formData.get("username"),
+    };
+
+  const { username, password } = validatedFields.data;
+
+  const usersCollection = await getCollection("users");
+
+  if (!usersCollection)
+    return { errors: { usenrame: "Server error", password: "" } };
+
+  const existingUser = await usersCollection.findOne({ username });
+
+  if (!existingUser)
+    return { errors: { username: "Invalid credentials", password: "" } };
+
+  const matchedPassword = await bcrypt.compare(password, existingUser.password);
+
+  if (!matchedPassword)
+    return { erros: { username: "Invalid credentials", password: "" } };
+
+  await createSession(existingUser._id.toString());
+
+  redirect("/");
 }

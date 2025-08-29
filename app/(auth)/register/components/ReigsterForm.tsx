@@ -3,6 +3,7 @@
 import { register } from "@/actions/auth/auth";
 import Input from "@/components/ui/Input";
 import Link from "next/link";
+import { ClipLoader } from "react-spinners";
 import { useActionState } from "react";
 
 const RegisterForm = () => {
@@ -28,6 +29,8 @@ const RegisterForm = () => {
           id="username"
           name="username"
           placeholder="Enter your username"
+          hasValidation={true}
+          errorMessage={state?.errors.username}
         />
       </Input>
       <Input className="w-full">
@@ -37,6 +40,8 @@ const RegisterForm = () => {
           name="password"
           type="password"
           placeholder="Enter your password"
+          hasValidation={true}
+          errorMessage={state?.errors.password}
         />
       </Input>
       <Input className="w-full">
@@ -46,20 +51,26 @@ const RegisterForm = () => {
           name="repeatPassword"
           type="password"
           placeholder="Repeat your password"
+          hasValidation={true}
+          errorMessage={state?.errors.repeatPassword}
         />
       </Input>
-      <div className="flex items-center gap-4">
-        <Input className="flex items-center gap-2">
-          <Input.Radio value="male" id="male" name="gender" />
-          <Input.Label htmlFor="male">Male</Input.Label>
-        </Input>
-        <Input className="flex items-center gap-2">
-          <Input.Radio value="female" id="female" name="gender" />
-          <Input.Label htmlFor="female">Female</Input.Label>
-        </Input>
+      <div>
+        <div className="flex items-center gap-4">
+          <Input className="flex items-center gap-2">
+            <Input.Radio value="male" id="male" name="gender" />
+            <Input.Label htmlFor="male">Male</Input.Label>
+          </Input>
+          <Input className="flex items-center gap-2">
+            <Input.Radio value="female" id="female" name="gender" />
+            <Input.Label htmlFor="female">Female</Input.Label>
+          </Input>
+        </div>
+        <span className="text-red-500 text-sm">{state?.errors.gender}</span>
       </div>
 
-      <button className="font-medium py-2 w-full rounded-xl bg-custom-green text-white cursor-pointer">
+      <button className="font-medium py-2 w-full rounded-xl bg-custom-green text-white cursor-pointer flex items-center justify-center gap-4">
+        {panding && <ClipLoader color="white" />}
         Register
       </button>
       <p className="text-medium-gray">
