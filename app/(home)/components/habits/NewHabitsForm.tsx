@@ -55,9 +55,10 @@ const NewHabitsForm = ({
       <div className="flex-1 h-full overflow-y-auto p-2 sm:p-4 space-y-4">
         {/* Habit Title */}
         <Input>
-          <Input.Label>Habit Title</Input.Label>
+          <Input.Label htmlFor="title">Habit Title</Input.Label>
           <Input.Field
             hasValidation={true}
+            id="title"
             value={newHabitDetails.title}
             errorMessage={errors.title}
             name="title"
@@ -68,8 +69,9 @@ const NewHabitsForm = ({
 
         {/* Description */}
         <Input>
-          <Input.Label>Description</Input.Label>
+          <Input.Label htmlFor="description">Description</Input.Label>
           <Input.Textarea
+            id="description"
             value={newHabitDetails.description}
             onChange={onInputChange}
             errorMessage={errors.description}
@@ -94,8 +96,9 @@ const NewHabitsForm = ({
           </DropDown>
 
           <Input className="max-w-[120px]">
-            <Input.Label>Times per/day</Input.Label>
+            <Input.Label htmlFor="timesPerDay">Times per/day</Input.Label>
             <Input.Field
+              id="timesPerDay"
               value={Number(newHabitDetails.timesPerDay)}
               name="timesPerDay"
               hasValidation
@@ -120,8 +123,9 @@ const NewHabitsForm = ({
             </div>
             {newHabitDetails.reminder && (
               <Input className="!w-fit">
-                <Input.Label>Choose Time</Input.Label>
+                <Input.Label htmlFor="time">Choose Time</Input.Label>
                 <Input.Field
+                  id="time"
                   value={newHabitDetails.remindTime}
                   errorMessage={errors.remindTime}
                   onChange={onInputChange}

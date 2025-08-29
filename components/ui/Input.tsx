@@ -13,10 +13,34 @@ const Input = ({ children, className }: InputRootProps) => {
   return <div className={`${className}`}>{children}</div>;
 };
 
+interface LabelProps {
+  children: ReactNode;
+  htmlFor: string;
+}
+
 // ✅ Label
-const Label = ({ children }: { children: ReactNode }) => (
-  <label className="text-sm font-medium text-medium-gray whitespace-nowrap">
+const Label = ({ children, htmlFor }: LabelProps) => (
+  <label
+    htmlFor={htmlFor}
+    className="text-sm font-medium text-medium-gray whitespace-nowrap"
+  >
     {children}
+  </label>
+);
+
+interface RadioProps extends InputHTMLAttributes<HTMLInputElement> {
+  label?: string;
+}
+
+const Radio = ({ label, ...props }: RadioProps) => (
+  <label className="cursor-pointer select-none inline-flex items-center gap-2 relative">
+    {/* Hide the actual radio but keep it in the DOM */}
+    <input type="radio" {...props} className="sr-only peer" />
+    {/* Custom circle */}
+    <span className="w-5 h-5 flex items-center justify-center rounded-full border-2 border-light-gray transition-colors peer-checked:border-custom-green peer-checked:bg-custom-green">
+      <span className="w-2.5 h-2.5 bg-white rounded-full opacity-0 peer-checked:opacity-100"></span>
+    </span>
+    {label && <span className="text-sm text-gray-700">{label}</span>}
   </label>
 );
 
@@ -24,7 +48,7 @@ const Label = ({ children }: { children: ReactNode }) => (
 interface FieldProps extends InputHTMLAttributes<HTMLInputElement> {
   hasIcon?: boolean;
   hasValidation?: boolean;
-  errorMessage?: string;
+  errorMessage?: string | string[];
 }
 
 const Field = ({
@@ -112,5 +136,6 @@ Input.Field = Field;
 Input.Textarea = Textarea;
 Input.Icon = Icon;
 Input.Checkbox = Checkbox;
+Input.Radio = Radio;
 
 export default Input;
