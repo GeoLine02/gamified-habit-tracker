@@ -7,7 +7,7 @@ export default function BaseLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-col min-h-screen pb-4 gap-6">
+    <div className="flex flex-col min-h-screen pb-4 gap-6ga">
       <Header />
       <main className="flex-1 flex flex-col">{children}</main>
       <Footer />
