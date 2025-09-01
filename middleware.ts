@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import getAuthUser from "./lib/getAuthUSer";
+import getAuthUser from "./lib/getAuthUser";
 
 const protectedRoutes = ["/", "/profile"];
 const publicRoutes = ["/login", "/signup"];
