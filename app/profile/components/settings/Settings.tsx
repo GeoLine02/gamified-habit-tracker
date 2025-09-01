@@ -1,4 +1,4 @@
-// Settings.tsx
+import { logout } from "@/actions/auth/auth";
 import Input from "@/components/ui/Input";
 
 const Settings = () => {
@@ -51,7 +51,10 @@ const Settings = () => {
 
         {/* Log Out Section */}
         <div>
-          <button className="w-full py-3 px-4 bg-medium-gray font-medium text-white rounded-xl hover:bg-medium-gray/90 transition lg:w-auto">
+          <button
+            onClick={logout}
+            className="w-full py-3 px-4 bg-medium-gray font-medium text-white rounded-xl hover:bg-medium-gray/90 transition lg:w-auto"
+          >
             Log Out
           </button>
         </div>
