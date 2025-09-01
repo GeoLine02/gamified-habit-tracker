@@ -6,6 +6,7 @@ import { handleHashPassword } from "@/components/utils/hashPassword";
 import { redirect } from "next/navigation";
 import { createSession } from "@/lib/sessions";
 import bcrypt from "bcryptjs";
+import { cookies } from "next/headers";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function register(_state: any, formData: FormData) {
@@ -104,4 +105,10 @@ export async function login(_state: any, formData: FormData) {
   await createSession(existingUser._id.toString());
 
   redirect("/");
+}
+
+export async function logout() {
+  const cookieStore = await cookies();
+  cookieStore.delete("session");
+  redirect("/login");
 }
