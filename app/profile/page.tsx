@@ -1,4 +1,3 @@
-// Profile.tsx
 import AchievementsSection from "./components/achievements/AchievementsSection";
 import StatsSections from "./components/profileStats/StatsSections";
 import SettingsSection from "./components/settings/SettingsSection";

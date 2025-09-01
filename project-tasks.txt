@@ -1,0 +1,25 @@
+<<<<<<<--------- Features --------->>>>>>>
+
+1. Change username and password services.
+
+2. Failing habit if not complited in time.
+
+3. Achievements system.
+
+4. Not found page.
+
+5. Loading before data feching.
+
+6. Calculate and display: total XP, total streaks, current XP and current streaks.
+
+7. Description on habit card.
+
+8. Highlight active Links.
+
+9. User Image upload.
+
+10. Initial render animations on header footer and habits.
+
+<<<<<<<<---------- FIXES ----------->>>>>>>>>
+
+1. Profile: Spacing between settings and mobile navigation.

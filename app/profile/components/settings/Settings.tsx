@@ -8,12 +8,12 @@ const Settings = () => {
 
       <div className="bg-white p-6 rounded-2xl shadow-sm flex flex-col gap-8 flex-1 lg:flex-0 h-full">
         {/* Username Section */}
-        <div className="flex flex-col lg:flex-row items-end gap-4">
-          <Input>
+        <div className="flex flex-col lg:flex-row items-end gap-4 w-full">
+          <Input className="w-full md:w-auto">
             <Input.Label htmlFor="currentUsername">Change Username</Input.Label>
             <Input.Field id="currentUsername" placeholder="Current Username" />
           </Input>
-          <button className="w-full md:w-auto py-2 px-6 bg-custom-green text-white font-medium rounded-xl border-2 border-custom-green hover:bg-custom-green/90 transition">
+          <button className="w-full md:w-auto py-2 px-6 bg-custom-green text-white font-medium rounded-xl border-2 border-custom-green hover:bg-custom-green/90 transition cursor-pointer whitespace-nowrap">
             Change Username
           </button>
         </div>
@@ -22,7 +22,7 @@ const Settings = () => {
 
         {/* Password Section */}
         <div className="flex flex-col gap-4 lg:flex-row items-end">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
             <Input>
               <Input.Label htmlFor="currentPassword">
                 Current Password
@@ -42,7 +42,7 @@ const Settings = () => {
               />
             </Input>
           </div>
-          <button className="w-full md:w-auto py-2 px-6 bg-custom-green text-white font-medium rounded-xl border-2 border-custom-green hover:bg-custom-green/90 transition self-end">
+          <button className="w-full md:w-auto py-2 px-6 bg-custom-green text-white font-medium rounded-xl border-2 border-custom-green hover:bg-custom-green/90 transition self-end cursor-pointer whitespace-nowrap">
             Change Password
           </button>
         </div>
@@ -53,7 +53,7 @@ const Settings = () => {
         <div>
           <button
             onClick={logout}
-            className="w-full py-3 px-4 bg-medium-gray font-medium text-white rounded-xl hover:bg-medium-gray/90 transition lg:w-auto"
+            className="w-full py-3 px-4 bg-medium-gray font-medium text-white rounded-xl hover:bg-medium-gray/90 transition lg:w-auto cursor-pointer whitespace-nowrap"
           >
             Log Out
           </button>
